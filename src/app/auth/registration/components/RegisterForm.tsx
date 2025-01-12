@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 import { Form } from '@/components/ui/form';
@@ -13,11 +14,12 @@ import ConditionSignIn from '../../components/ConditionSignIn';
 import CheckBox from './CheckBox';
 import Loading from '../../components/Loading';
 import DropDown from '@/shared/DropDown';
+import { handleRegister } from '../../actions';
+import { useRouter } from 'next/navigation';
 
 const RegisterForm = () => {
     const [selectedValue, setSelectedValue] = useState<string>('');
-    console.log('🚀 ~ RegisterForm ~ selectedValue:', selectedValue);
-
+    const router = useRouter();
     // Handle change event
     const handleSelectChange = (
         event: React.ChangeEvent<HTMLSelectElement>
@@ -44,7 +46,37 @@ const RegisterForm = () => {
 
     // Define submit handler.
     const onSubmit = async (values: z.infer<typeof registrationSchema>) => {
-        console.log('🚀 ~ onSubmit ~ values:', values);
+        if (!values?.acceptCondition) {
+            toast.error('You must agreed our Terms and Conditions');
+        }
+        if (!selectedValue) {
+            toast.error('You must select a role');
+        }
+
+        const { acceptCondition, confirmPassword, ...userInfo } = values;
+
+        const registerData = {
+            ...userInfo,
+            role: selectedValue
+        };
+
+        if (values?.acceptCondition && selectedValue) {
+            try {
+                setLoading(true);
+                const res = await handleRegister(registerData);
+                if (res.success === true) {
+                    setLoading(false);
+                    router.push('/auth/login');
+                    toast.success('Check Email For Verification!');
+                } else {
+                    setLoading(false);
+                    toast.error(res?.message);
+                }
+            } catch (error: any) {
+                setLoading(false);
+                toast.error(error?.message);
+            }
+        }
     };
 
     // input class
@@ -60,9 +92,8 @@ const RegisterForm = () => {
                             Registration
                         </h5>
                         <p className='text-second-900'>
-                            Register as user Or Register as Attendee base on
-                            your role you will be redirect to different
-                            dashboard
+                            Register as a User or an Attendee. Based on your
+                            role, you will be shown personalized content.
                         </p>
                     </div>
                     <Form {...form}>

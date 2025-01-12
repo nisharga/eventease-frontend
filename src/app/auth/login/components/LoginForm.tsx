@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import { Form } from '@/components/ui/form';
 import { loginSchema } from '@/schema/auth';
@@ -10,8 +10,12 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import ConditionSignIn from '../../components/ConditionSignIn';
 import Loading from '../../components/Loading';
+import { handleLogin } from '../../actions';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 const LoginForm = () => {
+    const router = useRouter();
     const [loading, setLoading] = useState<boolean>();
 
     // Define init value.
@@ -25,29 +29,31 @@ const LoginForm = () => {
 
     // Define submit handler.
     const onSubmit = async (values: z.infer<typeof loginSchema>) => {
-        console.log('🚀 ~ onSubmit ~ values:', values);
+        try {
+            setLoading(true);
+            const res = await handleLogin(values);
+            if (res.statusCode === 200) {
+                if (res?.data?.user?.role === 'USER') {
+                    router.push('/user');
+                    toast.success('USER Login Successful!');
+                    setLoading(false);
+                } else if (res?.data?.user?.role === 'ATTENDEE') {
+                    router.push('/attendee');
+                    toast.success('ATTENDEE Login Successful!');
+                    setLoading(false);
+                } else {
+                    toast.error('No user found!!!');
+                    setLoading(false);
+                }
+            } else {
+                setLoading(false);
+                toast.error(res?.message);
+            }
+        } catch (error: any) {
+            setLoading(false);
+            toast.error(error?.message);
+        }
     };
-
-    /* try {
-      setLoading(true);
-      const res = await handleLogin(values);
-      if (res.statusCode === 200) {
-          if (res?.data?.user?.role === 'USER') {
-              router.push('/user/dashboard');
-              toast.success('You have successfully Login!');
-              setLoading(false);
-          } else {
-              toast.error('No user found!!!');
-              setLoading(false);
-          }
-      } else {
-          setLoading(false);
-          toast.error(res?.message);
-      }
-  } catch (error: any) {
-      setLoading(false);
-      toast.error(error?.message);
-  } */
 
     // input class
     const inputClass =
