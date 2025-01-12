@@ -12,8 +12,19 @@ import { z } from 'zod';
 import ConditionSignIn from '../../components/ConditionSignIn';
 import CheckBox from './CheckBox';
 import Loading from '../../components/Loading';
+import DropDown from '@/shared/DropDown';
 
 const RegisterForm = () => {
+    const [selectedValue, setSelectedValue] = useState<string>('');
+    console.log('🚀 ~ RegisterForm ~ selectedValue:', selectedValue);
+
+    // Handle change event
+    const handleSelectChange = (
+        event: React.ChangeEvent<HTMLSelectElement>
+    ) => {
+        setSelectedValue(event.target.value); // Update state
+    };
+
     const [loading, setLoading] = useState<boolean>();
     const [referCode, setReferCode] = useState<string>('');
 
@@ -27,7 +38,6 @@ const RegisterForm = () => {
             email: '',
             password: '',
             confirmPassword: '',
-            code: '',
             acceptCondition: false
         }
     });
@@ -45,13 +55,14 @@ const RegisterForm = () => {
         <div>
             {steps == 1 ? (
                 <>
-                    <div className='px-6 md:px-12 lg:px-28 text-center mb-4'>
+                    <div className='px-6 md:px-12 lg:px-24 text-center mb-4'>
                         <h5 className='text-black text-3xl font-bold mb-1.5'>
-                            ssssssssssssss
+                            Registration
                         </h5>
                         <p className='text-second-900'>
-                            Lorem ipsum dolor, sit amet consectetur adipisicing
-                            elit. Sint, ad!
+                            Register as user Or Register as Attendee base on
+                            your role you will be redirect to different
+                            dashboard
                         </p>
                     </div>
                     <Form {...form}>
@@ -78,6 +89,31 @@ const RegisterForm = () => {
                                     placeholder='Enter Your Email'
                                     className={inputClass}
                                 />
+                            </div>
+
+                            <div className='py-2'>
+                                <div className=''>
+                                    <label
+                                        htmlFor='dropdown'
+                                        className='text-black font-medium pl-1 !text-base block mb-2'
+                                    >
+                                        Choose Your Role*
+                                    </label>
+                                    <select
+                                        id='dropdown'
+                                        value={selectedValue}
+                                        onChange={handleSelectChange}
+                                        className={`${inputClass} !py-2 !w-full`}
+                                    >
+                                        <option className='!pl-5'>
+                                            Select Your Role
+                                        </option>
+                                        <option value='USER'>USER</option>
+                                        <option value='ATTENDEE'>
+                                            ATTENDEE
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
 
                             <div className='mb-2'>
@@ -108,7 +144,7 @@ const RegisterForm = () => {
                             <div className='mb-4'>
                                 <RoundedBtn
                                     type='submit'
-                                    className='py-3 w-full !flex items-center justify-center gap-3'
+                                    className='py-3 w-full !flex items-center justify-center gap-3 bg-black rounded-[12px]'
                                 >
                                     {loading ? <Loading /> : 'Sign Up'}
                                 </RoundedBtn>

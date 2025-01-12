@@ -1,11 +1,8 @@
-import { Welcome } from "./components";
+import { redirect } from 'next/navigation';
+import * as React from 'react';
 
-const page = () => {
-  return (
-    <div>
-      <Welcome />
-    </div>
-  );
+const page: React.FunctionComponent = () => {
+    redirect('/auth/login');
 };
 
 export default page;

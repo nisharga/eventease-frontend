@@ -1,57 +1,57 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { FC } from "react";
+import { FC } from 'react';
 
 interface IProps {
-  pageName: string;
+    pageName: string;
 }
 
 const ConditionSignIn: FC<IProps> = ({ pageName }) => {
-  return (
-    <>
-      {pageName === "register" ? (
-        <div className="flex items-center justify-center gap-2">
-          <span>—</span>
-          <div className="">
-            <label
-              htmlFor="acceptCondition"
-              className="text-black font-medium"
-            >
-              Already a DiasporeX User?
-            </label>
-            <Link
-              href="/auth/login"
-              className="text-second-550 ml-1 font-medium underline"
-            >
-              Sign in
-            </Link>
-          </div>
-          <span>—</span>
-        </div>
-      ) : pageName === "login" ? (
-        <div className="flex items-center justify-center gap-2">
-          <span className="hidden sm:block">—</span>
-          <div className="text-center">
-            <label
-              htmlFor="acceptCondition"
-              className="text-black font-medium"
-            >
-              Do not have an account?
-            </label>
-            <Link
-              href="/auth/registration"
-              className="text-second-550 ml-1 font-medium underline"
-            >
-              Register as a User
-            </Link>
-          </div>
-          <span className="hidden sm:block">—</span>
-        </div>
-      ) : (
-        ""
-      )}
-    </>
-  );
+    return (
+        <>
+            {pageName === 'register' ? (
+                <div className='flex items-center justify-center gap-2'>
+                    <span>—</span>
+                    <div className=''>
+                        <label
+                            htmlFor='acceptCondition'
+                            className='text-black font-medium'
+                        >
+                            Already a EventEase User?
+                        </label>
+                        <Link
+                            href='/auth/login'
+                            className='text-second-550 ml-1 font-medium underline'
+                        >
+                            Sign in
+                        </Link>
+                    </div>
+                    <span>—</span>
+                </div>
+            ) : pageName === 'login' ? (
+                <div className='flex items-center justify-center gap-2'>
+                    <span className='hidden sm:block'>—</span>
+                    <div className='text-center'>
+                        <label
+                            htmlFor='acceptCondition'
+                            className='text-black font-medium'
+                        >
+                            Do not have an account?
+                        </label>
+                        <Link
+                            href='/auth/registration'
+                            className='text-second-550 ml-1 font-medium underline'
+                        >
+                            Register as a User
+                        </Link>
+                    </div>
+                    <span className='hidden sm:block'>—</span>
+                </div>
+            ) : (
+                ''
+            )}
+        </>
+    );
 };
 
 export default ConditionSignIn;

@@ -82,7 +82,7 @@ const LoginForm = () => {
                     <div className='mb-4 my-10'>
                         <RoundedBtn
                             type='submit'
-                            className='py-3 w-full !flex items-center justify-center gap-3'
+                            className='py-3 w-full !flex items-center justify-center gap-3 bg-black rounded-[12px]'
                             disabled={loading ? true : false}
                         >
                             {loading ? <Loading /> : 'Sign In'}
