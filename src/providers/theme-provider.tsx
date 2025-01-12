@@ -1,15 +1,11 @@
-"use client";
-import {
-  ThemeProvider as NextThemesProvider,
-  ThemeProviderProps,
-} from "next-themes";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+'use client';
 
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
-  return (
-    <NextThemesProvider {...props}>
-      <main className="scroll-smooth" suppressHydrationWarning>
-        {children}
-      </main>
-    </NextThemesProvider>
-  );
+export function ThemeProvider({ children, ...props }: any) {
+    return (
+        <main className='scroll-smooth' suppressHydrationWarning>
+            {children}
+        </main>
+    );
 }
