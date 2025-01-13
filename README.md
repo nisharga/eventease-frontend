@@ -1,37 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# EventEase Frontend
+
+Welcome to the EventEase Frontend repository! This project is designed to provide a seamless and engaging user interface for managing events with ease.
+
+---
 
 ## Getting Started
 
-First, run the development server:
+Follow the steps below to set up the project on your local machine:
 
+### Step 0: Clone the Repository
+Clone the repository to your local system using the following command:
+```bash
+git clone https://github.com/nisharga/eventease-frontend.git
+````
+
+
+### Step 1: Navigate to the Project Folder
+Alternatively, you can open the folder manually or open it with VSCode.
+```bash
+cd eventease-frontend
+````
+
+### Step 2: Install Dependencies
+Install the required dependencies by running the following command:
+```bash
+npm i --force
+````
+
+
+### Step 3: Run the Project
+Run the project using the following command:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+````
+This command will start the project. Ensure the backend is running, otherwise, you may encounter the following error: "Cannot read properties of undefined (reading 'statusCode')"
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Application Workflow
 
-## Learn More
+#### Registration
+First, you need to register an account in the application.
 
-To learn more about Next.js, take a look at the following resources:
+#### Email Verification
+After registration, verify your email. A verification link will be sent to your email address.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### Login
+Once your email is verified, you can log in to the application.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+#### Role-Based Redirection
+Based on your role, you will be redirected to the appropriate page within the application.
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# eventease-frontend
