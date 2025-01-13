@@ -2,8 +2,10 @@
 
 import RoundedBtn from '@/shared/RoundedBtn';
 import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
 
 const Logout = () => {
+    const router = useRouter();
     const handleClick = () => {
         // Remove cookies
         Cookies.remove('accessToken', { path: '/' });
@@ -13,9 +15,8 @@ const Logout = () => {
 
         // Remove session storage item
         sessionStorage.removeItem('hasShownWelcomeToast');
-
+        router.push('/auth/login');
         // Optionally, redirect the user after logout
-        console.log('User logged out'); // For debugging
     };
 
     return (

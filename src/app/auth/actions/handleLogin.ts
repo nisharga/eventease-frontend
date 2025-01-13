@@ -18,10 +18,7 @@ export const handleLogin = async (loginData: IProps) => {
             Cookies.set('accessToken', accessToken);
             Cookies.set('refreshToken', refreshToken);
             Cookies.set('role', user?.role);
-            Cookies.set('name', user?.name, {
-                secure: false,
-                sameSite: 'none'
-            });
+            Cookies.set('name', user?.name);
         }
         return data;
     } catch (error) {
