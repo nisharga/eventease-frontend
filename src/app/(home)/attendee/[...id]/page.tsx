@@ -1,11 +1,12 @@
 'use client';
-import Cookies from 'js-cookie';
 import React, { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { Header } from '../components/Header';
-import { RunningEvent } from './Components';
+import { Header } from '../../components/Header';
+import { useParams, useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
+import EventDetails from './components/EventDetails';
+import AttendeeRegister from './components/AttendeeRegister';
 
-const Attendee = () => {
+const EventRegister = () => {
     const router = useRouter();
     useEffect(() => {
         // Check for the `accessToken` in cookies
@@ -16,15 +17,18 @@ const Attendee = () => {
             router.push('/auth/login');
         }
     }, [router]);
+    const { id } = useParams();
+    const paramsId = id?.[0];
 
     return (
         <div>
-            <Header type='Attendee' />
+            <Header type='Event Register' />
             <div className='mb-6'>
                 <div className='container'>
                     <div className='grid grid-cols-12 gap-6'>
-                        <div className='col-span-12 lg:col-span-12 bg-first-300 rounded-3xl px-8 py-10'>
-                            <RunningEvent />
+                        <div className='col-span-12 bg-first-300 rounded-3xl px-8 py-10'>
+                            <EventDetails paramsId={paramsId} />
+                            <AttendeeRegister paramsId={paramsId} />
                         </div>
                     </div>
                 </div>
@@ -33,4 +37,4 @@ const Attendee = () => {
     );
 };
 
-export default Attendee;
+export default EventRegister;

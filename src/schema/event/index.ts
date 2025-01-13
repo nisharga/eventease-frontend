@@ -25,3 +25,12 @@ export const eventSchema = z.object({
         message: 'Provide a valid email address.'
     })
 });
+
+export const attendeeSchema = z.object({
+    attendeeName: z.string().min(2, {
+        message: 'Attendee name must be at least 2 characters long.'
+    }),
+    attendeePhone: z.string().regex(/^\+?[1-9]\d{1,14}$/, {
+        message: 'Provide a valid phone number.'
+    })
+});
