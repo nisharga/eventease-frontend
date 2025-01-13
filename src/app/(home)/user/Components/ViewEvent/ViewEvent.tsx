@@ -23,7 +23,7 @@ const ViewEvent: React.FC<ViewEventProps> = ({
 }) => (
     <Dialog open={isViewOpen} onOpenChange={setIsViewOpen}>
         <DialogTrigger asChild>
-            <button className='border p-2 font-semibold rounded-[6px]'>
+            <button className='border p-2 font-semibold rounded-[6px] bg-black w-2'>
                 View
             </button>
         </DialogTrigger>

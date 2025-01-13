@@ -100,7 +100,10 @@ const AddEvent = () => {
                         />
                     </div>
 
-                    <RoundedBtn className='!w-full mt-4 !py-4' type='submit'>
+                    <RoundedBtn
+                        className='!w-full mt-4 !py-4 bg-[#d1d5db] !text-black'
+                        type='submit'
+                    >
                         {/* {!loading ? <Loading /> : 'Add Event'} */} Add Event
                     </RoundedBtn>
                 </form>

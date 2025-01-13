@@ -1,16 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import { getAllEvents } from '../Actions/EventList';
 import { Dialog, DialogContent } from '@/components/ui/alert-dialog';
 import { DialogTrigger } from '@/components/ui/dialog';
-import Button from '@/components/core/buttons/Button';
 
 const EventList = () => {
     const [events, setEvents] = useState<any[]>([]); // Adjust type based on your API response
-
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string>('');
+    const [activeEventId, setActiveEventId] = useState<string | null>(null); // Track the active dialog
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -27,11 +25,12 @@ const EventList = () => {
         fetchEvents();
     }, []);
 
-    const [isViewOpen, setIsViewOpen] = useState(false);
-
     return (
         <div className='text-white'>
             <h2 className='text-2xl mb-4'>List Of Events</h2>
+
+            {loading && <p>Loading events...</p>}
+            {error && <p className='text-red-500'>{error}</p>}
 
             {events?.map(
                 ({
@@ -43,20 +42,16 @@ const EventList = () => {
                     createdBy
                 }: any) => (
                     <div
-                        className='w-full p-4  rounded-lg shadow-md flex gap-2 items-center justify-center bg-white mb-4'
+                        className='w-full p-4 rounded-lg shadow-md flex gap-2 items-center justify-center bg-white mb-4'
                         key={id}
                     >
-                        {/* Header */}
-
-                        {/* Event Information */}
                         <div className='font-semibold text-black flex flex-col md:flex-row md:items-center md:gap-4 w-full'>
                             <p className='text-base'>
                                 <span className='font-bold pr-2'>
                                     Event Name:
-                                </span>{' '}
+                                </span>
                                 {name}
                             </p>
-
                             <p className='text-base'>
                                 <span className='font-bold pr-2'>
                                     Sit Remain:
@@ -64,10 +59,12 @@ const EventList = () => {
                                 {maxAttendees}
                             </p>
 
-                            {/* view modal */}
+                            {/* View Modal */}
                             <Dialog
-                                open={isViewOpen}
-                                onOpenChange={setIsViewOpen}
+                                open={activeEventId === id} // Open the dialog if this event is active
+                                onOpenChange={(isOpen) =>
+                                    setActiveEventId(isOpen ? id : null)
+                                }
                             >
                                 <DialogTrigger asChild>
                                     <button className='border p-2 font-semibold rounded-[6px]'>
@@ -91,31 +88,30 @@ const EventList = () => {
                                         <p className='text-base'>
                                             <span className='font-bold pr-2'>
                                                 Sit Remain:
-                                            </span>
+                                            </span>{' '}
                                             {maxAttendees}
                                         </p>
                                         <p className='text-base'>
                                             <span className='font-bold pr-2'>
                                                 Date:
-                                            </span>
+                                            </span>{' '}
                                             {date}
-                                        </p>{' '}
+                                        </p>
                                         <p className='text-base'>
                                             <span className='font-bold pr-2'>
                                                 Location:
-                                            </span>
+                                            </span>{' '}
                                             {location}
-                                        </p>{' '}
+                                        </p>
                                         <p className='text-base'>
                                             <span className='font-bold pr-2'>
-                                                Created By::
-                                            </span>
+                                                Created By:
+                                            </span>{' '}
                                             {createdBy}
                                         </p>
                                     </div>
                                 </DialogContent>
                             </Dialog>
-                            {/* modal */}
                         </div>
                     </div>
                 )
