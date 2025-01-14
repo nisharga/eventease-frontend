@@ -6,6 +6,13 @@ Welcome to the EventEase Frontend repository! This project is designed to provid
 
 ## Getting Started
 
+.env
+
+```bash
+NEXT_PUBLIC_API_BASE_URL="http://localhost:5000/api/v1"
+NEXT_PUBLIC_API_URL="http://localhost:5000/api/v1"
+````
+
 Follow the steps below to set up the project on your local machine:
 
 ### Step 0: Clone the Repository

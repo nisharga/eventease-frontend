@@ -194,6 +194,7 @@ const EventList = () => {
                                         <div className='p-6 text-center text-white text-2xl font-semibold'>
                                             Are You Sure To Delete This Event
                                         </div>
+
                                         <div className='flex flex-col gap-4 text-white'>
                                             <p className='text-base'>
                                                 <span className='font-bold pr-2'>
@@ -231,6 +232,11 @@ const EventList = () => {
                                             >
                                                 Delete
                                             </RoundedBtn>
+                                            <p className='text-white text-center py-4'>
+                                                (Make sure no one registers for
+                                                that event; otherwise, you
+                                                cannot delete it.)
+                                            </p>
                                         </div>
                                     </DialogContent>
                                 </Dialog>
